@@ -1,0 +1,22 @@
+#grid {
+	display: grid;
+	grid-template-columns: repeat(10, min(7vw, 7vh));
+	grid-template-rows: repeat(10, min(7vw, 7vh));
+	box-sizing: border-box;
+	justify-content: center;
+	align-content: center;
+}
+
+.grid_element_1 {
+	background-color: #645111;
+	height: 100%;
+	width: 100%;
+	margin: 3px;
+}
+
+.grid_element_0 {
+	background-color: #c29c20;
+	height: 100%;
+	width: 100%;
+	margin: 3px;
+}
