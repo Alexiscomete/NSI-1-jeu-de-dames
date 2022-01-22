@@ -22,10 +22,16 @@
 }
 
 .pion {
-	margin: 1%;
-	padding: 1%;
-	height: 96%;
-	width: 96%;
+	margin: 3%;
+	padding: 3%;
+	height: 88%;
+	width: 88%;
+}
+
+.pion:hover {
+	height: 84%;
+	width: 84%;
+	border: solid #655465 min(0.1vw);
 }
 
 .pion_img {
