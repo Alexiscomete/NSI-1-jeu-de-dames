@@ -22,19 +22,30 @@
 }
 
 .pion {
+	height: 100%;
+	width: 100%;
+}
+
+.pion_border:hover .pion {
+	height: 90%;
+	width: 90%;
+	padding: 5%;
+	background-color: #645111;
+}
+
+.pion_img {
+	height: 100%;
+	width: 100%;
+}
+
+
+.pion_border {
 	margin: 3%;
 	padding: 3%;
 	height: 88%;
 	width: 88%;
 }
 
-.pion:hover {
-	height: 84%;
-	width: 84%;
-	border: solid #655465 min(0.1vw);
-}
-
-.pion_img {
-	height: 100%;
-	width: 100%;
+.pion_border:hover {
+	background-color: aqua;
 }
