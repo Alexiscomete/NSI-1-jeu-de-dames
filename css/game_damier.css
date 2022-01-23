@@ -49,3 +49,14 @@
 .pion_border:hover {
 	background-color: aqua;
 }
+
+.border_click {
+	background-color: #121364;
+}
+
+.border_click .pion {
+	height: 90%;
+	width: 90%;
+	padding: 5%;
+	background-color: #645111;
+}

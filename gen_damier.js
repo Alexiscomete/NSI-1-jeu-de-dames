@@ -40,3 +40,7 @@ for (let i = 0; i < 10; i++) {
         element.appendChild(ele)
     }
 }
+
+let sc = document.createElement("script")
+sc.src = "./game.js"
+element.appendChild(sc)
