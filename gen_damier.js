@@ -7,6 +7,8 @@ for (let i = 0; i < 10; i++) {
         ele.id = i + " " + j
         if ((j+i%2)%2 == 1) {
             if (i < 4) {
+                let pionCon = document.createElement("div")
+                pionCon.classList.add("pion_border")
                 let pion = document.createElement("div")
                 let pion_img = document.createElement("img")
                 pion_img.setAttribute("src", "./img/pion_white.drawio.svg")
@@ -15,8 +17,11 @@ for (let i = 0; i < 10; i++) {
                 pion.appendChild(pion_img)
                 pion.classList.add("pion")
                 pion.classList.add("white")
-                ele.appendChild(pion)
+                pionCon.appendChild(pion)
+                ele.appendChild(pionCon)
             } if (i > 5) {
+                let pionCon = document.createElement("div")
+                pionCon.classList.add("pion_border")
                 let pion = document.createElement("div")
                 let pion_img = document.createElement("img")
                 pion_img.setAttribute("src", "img/pion_black.drawio.svg")
@@ -28,9 +33,14 @@ for (let i = 0; i < 10; i++) {
                 pion.appendChild(pion_img)
                 pion.classList.add("pion")
                 pion.classList.add("black")
-                ele.appendChild(pion)
+                pionCon.appendChild(pion)
+                ele.appendChild(pionCon)
             }
         }
         element.appendChild(ele)
     }
 }
+
+let sc = document.createElement("script")
+sc.src = "./game.js"
+element.appendChild(sc)
