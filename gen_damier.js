@@ -16,7 +16,7 @@ for (let i = 0; i < 10; i++) {
                 pion_img.setAttribute("alt", "eee")
                 pion.appendChild(pion_img)
                 pion.classList.add("pion")
-                pion.classList.add("white")
+                pionCon.classList.add("white")
                 pionCon.appendChild(pion)
                 ele.appendChild(pionCon)
             } if (i > 5) {
@@ -27,12 +27,9 @@ for (let i = 0; i < 10; i++) {
                 pion_img.setAttribute("src", "img/pion_black.drawio.svg")
                 pion_img.classList.add("pion_img")
                 pion_img.setAttribute("alt", "eee")
-                pion_img.onerror = function(messageOrEvent, source, noligne, nocolonne, erreur) {
-                    console.log(messageOrEvent)
-                }
                 pion.appendChild(pion_img)
                 pion.classList.add("pion")
-                pion.classList.add("black")
+                pionCon.classList.add("black")
                 pionCon.appendChild(pion)
                 ele.appendChild(pionCon)
             }
