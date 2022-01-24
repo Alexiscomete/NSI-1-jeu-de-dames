@@ -67,36 +67,37 @@ function getPossibleCases(x, y, pionType, pionColor) {
             }
         }
     }
-    if (cases.bd != null) {
-        if (cases.bd.pion == null) {
-            cases_list += {where: cases.bd, eat: null}
-        } else if (cases.bd.pion.color != pionColor) {
-            let p = getPionJSON(x+2, y+2)
+    if (cases.bg != null) {
+        if (cases.bg.pion == null) {
+            cases_list += {where: cases.bg, eat: null}
+        } else if (cases.bg.pion.color != pionColor) {
+            let p = getPionJSON(x-2, y+2)
             if (p != null && p.pion == null) {
-                cases_list += {where: p, eat: cases.bd}
+                cases_list += {where: p, eat: cases.bg}
             }
         }
     }
-    if (cases.bd != null) {
-        if (cases.bd.pion == null) {
-            cases_list += {where: cases.bd, eat: null}
-        } else if (cases.bd.pion.color != pionColor) {
-            let p = getPionJSON(x+2, y+2)
+    if (cases.hd != null) {
+        if (cases.hd.pion == null) {
+            cases_list += {where: cases.hd, eat: null}
+        } else if (cases.hd.pion.color != pionColor) {
+            let p = getPionJSON(x+2, y-2)
             if (p != null && p.pion == null) {
-                cases_list += {where: p, eat: cases.bd}
+                cases_list += {where: p, eat: cases.hd}
             }
         }
     }
-    if (cases.bd != null) {
-        if (cases.bd.pion == null) {
-            cases_list += {where: cases.bd, eat: null}
-        } else if (cases.bd.pion.color != pionColor) {
-            let p = getPionJSON(x+2, y+2)
+    if (cases.hg != null) {
+        if (cases.hg.pion == null) {
+            cases_list += {where: cases.hg, eat: null}
+        } else if (cases.hg.pion.color != pionColor) {
+            let p = getPionJSON(x-2, y-2)
             if (p != null && p.pion == null) {
-                cases_list += {where: p, eat: cases.bd}
+                cases_list += {where: p, eat: cases.hg}
             }
         }
     }
+    return cases_list
 }
 
 
