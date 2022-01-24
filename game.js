@@ -42,10 +42,10 @@ function getPionJSON(x, y) {
 }
 
 function getCasesAround(x, y) {
-    let pionHD = getPionJSON(x+1, y-1)
-    let pionHG = getPionJSON(x-1, y-1)
-    let pionBD = getPionJSON(x+1, y+1)
-    let pionBG = getPionJSON(x-1, y+1)
+    let pionHD = getPionJSON(x + 1, y - 1)
+    let pionHG = getPionJSON(x - 1, y - 1)
+    let pionBD = getPionJSON(x + 1, y + 1)
+    let pionBG = getPionJSON(x - 1, y + 1)
     return {
         hd: pionHD,
         hg: pionHG,
@@ -57,43 +57,44 @@ function getCasesAround(x, y) {
 function getPossibleCases(x, y, pionType, pionColor) {
     let cases = getCasesAround(x, y)
     let cases_list = []
+    console.log(cases)
     if (cases.bd != null) {
         if (cases.bd.pion == null) {
-            cases_list += {where: cases.bd, eat: null}
+            cases_list += { where: cases.bd, eat: null }
         } else if (cases.bd.pion.color != pionColor) {
-            let p = getPionJSON(x+2, y+2)
+            let p = getPionJSON(x + 2, y + 2)
             if (p != null && p.pion == null) {
-                cases_list += {where: p, eat: cases.bd}
+                cases_list += { where: p, eat: cases.bd }
             }
         }
     }
     if (cases.bg != null) {
         if (cases.bg.pion == null) {
-            cases_list += {where: cases.bg, eat: null}
+            cases_list += { where: cases.bg, eat: null }
         } else if (cases.bg.pion.color != pionColor) {
-            let p = getPionJSON(x-2, y+2)
+            let p = getPionJSON(x - 2, y + 2)
             if (p != null && p.pion == null) {
-                cases_list += {where: p, eat: cases.bg}
+                cases_list += { where: p, eat: cases.bg }
             }
         }
     }
     if (cases.hd != null) {
         if (cases.hd.pion == null) {
-            cases_list += {where: cases.hd, eat: null}
+            cases_list += { where: cases.hd, eat: null }
         } else if (cases.hd.pion.color != pionColor) {
-            let p = getPionJSON(x+2, y-2)
+            let p = getPionJSON(x + 2, y - 2)
             if (p != null && p.pion == null) {
-                cases_list += {where: p, eat: cases.hd}
+                cases_list += { where: p, eat: cases.hd }
             }
         }
     }
     if (cases.hg != null) {
         if (cases.hg.pion == null) {
-            cases_list += {where: cases.hg, eat: null}
+            cases_list += { where: cases.hg, eat: null }
         } else if (cases.hg.pion.color != pionColor) {
-            let p = getPionJSON(x-2, y-2)
+            let p = getPionJSON(x - 2, y - 2)
             if (p != null && p.pion == null) {
-                cases_list += {where: p, eat: cases.hg}
+                cases_list += { where: p, eat: cases.hg }
             }
         }
     }
@@ -101,6 +102,18 @@ function getPossibleCases(x, y, pionType, pionColor) {
 }
 
 
+let colorsCases = []
+
+function setColorHelp(x, y, pionType, pionColor) {
+    for (let c of colorsCases) {
+        c.where.classList.remove("help")
+    }
+    colorsCases = getPossibleCases(x, y, pionType, pionColor)
+    console.log(colorsCases)
+    for (let c of colorsCases) {
+        c.where.classList.add("help")
+    }
+}
 
 let lastPion = null;
 
@@ -112,5 +125,7 @@ for (let pion of pions) {
         }
         pion.classList.add("border_click")
         lastPion = pion
+        let e = pion.parentElement.id.split(" ")
+        setColorHelp(e[1], e[0])
     })
 }
