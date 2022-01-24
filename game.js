@@ -85,11 +85,19 @@ function getPossibleCases(x, y, pionType, pionColor) {
 }
 
 let colorsCases = []
+let lastPion = null;
+
+
+function clickOnCase(ele, ev) {
+    
+}
+
 
 function setColorHelp(x, y, pionType, pionColor) {
     for (let c of colorsCases) {
         if (c != null && c.where != null) {
             c.where.case.classList.remove("help")
+            c.where.case.removeEventListener("click", clickOnCase)
         }
     }
     colorsCases = getPossibleCases(x, y, pionType, pionColor)
@@ -98,11 +106,11 @@ function setColorHelp(x, y, pionType, pionColor) {
         console.log(c)
         if (c != null && c.where != null) {
             c.where.case.classList.add("help")
+            c.where.case.addEventListener("click", clickOnCase)
         }
     }
 }
 
-let lastPion = null;
 
 let pions = document.getElementsByClassName("pion_border")
 for (let pion of pions) {
@@ -113,6 +121,6 @@ for (let pion of pions) {
         pion.classList.add("border_click")
         lastPion = pion
         let e = pion.parentElement.id.split(" ")
-        setColorHelp(parseInt(e[1]), parseInt(e[0]))
+        setColorHelp(parseInt(e[1]), parseInt(e[0]), "", getColor(pion))
     })
 }
