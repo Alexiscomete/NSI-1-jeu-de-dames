@@ -1,5 +1,7 @@
 function getCase(x, y) {
     let case1 = document.getElementById(y + " " + x)
+    console.log(case1)
+    console.log(y + " " + x)
     return case1
 }
 
@@ -18,27 +20,106 @@ function getColor(pion) {
 }
 
 function getPionJSON(x, y) {
-    let pion = getPion(x, y)
-    if (pion == null) {
+    if (getCase(x, y) == null) {
+        console.log("no case")
         return null
     }
+    let pion = getPion(x, y)
+    if (pion == null) {
+        return {
+            case: getCase(x, y),
+            x: x,
+            y: y,
+            pion: null
+        }
+    }
     let color = getColor(pion)
+    return {
+        case: getCase(x, y),
+        x: x,
+        y: y,
+        pion: {
+            color: color,
+            type: "normal",
+            pion: pion
+        }
+    }
 }
 
 function getCasesAround(x, y) {
-    let pionHD = getPion(x+1, y-1)
-    let pionHG = getPion(x-1, y-1)
-    let pionBD = getPion(x+1, y+1)
-    let pionBG = getPion(x-1, y+1)
+    let pionHD = getPionJSON(x + 1, y - 1)
+    let pionHG = getPionJSON(x - 1, y - 1)
+    let pionBD = getPionJSON(x + 1, y + 1)
+    let pionBG = getPionJSON(x - 1, y + 1)
+    return {
+        hd: pionHD,
+        hg: pionHG,
+        bd: pionBD,
+        bg: pionBG
+    }
+}
+
+function pushElement(cases_list, case_info, pionColor, x, y) {
+    if (case_info != null) {
+        if (case_info.pion == null) {
+            cases_list.push({ where: case_info, eat: null })
+        } else if (case_info.pion.color != pionColor) {
+            let p = getPionJSON(x, y)
+            if (p != null && p.pion == null) {
+                cases_list.push({ where: p, eat: case_info })
+            }
+        }
+    }
 }
 
 function getPossibleCases(x, y, pionType, pionColor) {
+    let cases = getCasesAround(x, y)
+    let cases_list = []
+    console.log(cases)
+    pushElement(cases_list, cases.bd, pionColor, x+2, y+2)
+    pushElement(cases_list, cases.bg, pionColor, x-2, y+2)
+    pushElement(cases_list, cases.hd, pionColor, x+2, y-2)
+    pushElement(cases_list, cases.hg, pionColor, x-2, y-2)
+    console.log(cases_list)
+    return cases_list
+}
 
+let colorsCases = []
+/**
+ * @type {Element}
+ */
+let lastPion = null;
+
+function clickOnCase(ele, ev) {
+    if (lastPion != null) {
+        lastPion.parentElement.removeChild(lastPion)
+        this.appendChild(lastPion)
+        setColorHelp(-5, -5, "ee", "ee")
+        if (c.eat != null) {
+            c.eat.pion.remove()
+        }
+    }
 }
 
 
+function setColorHelp(x, y, pionType, pionColor) {
+    for (let c of colorsCases) {
+        if (c != null && c.where != null) {
+            c.where.case.classList.remove("help")
+            c.where.case.removeEventListener("click", clickOnCase)
+        }
+    }
+    colorsCases = getPossibleCases(x, y, pionType, pionColor)
+    console.log(colorsCases)
+    for (let c of colorsCases) {
+        console.log(c)
+        if (c != null && c.where != null) {
+            c.where.case.classList.add("help")
+            c.where.case.addEventListener("click", clickOnCase)
+        }
+    }
+}
 
-let lastPion = null;
 
 let pions = document.getElementsByClassName("pion_border")
 for (let pion of pions) {
@@ -48,5 +129,7 @@ for (let pion of pions) {
         }
         pion.classList.add("border_click")
         lastPion = pion
+        let e = pion.parentElement.id.split(" ")
+        setColorHelp(parseInt(e[1]), parseInt(e[0]), "", getColor(pion))
     })
 }
