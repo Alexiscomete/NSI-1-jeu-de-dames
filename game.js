@@ -85,11 +85,20 @@ function getPossibleCases(x, y, pionType, pionColor) {
 }
 
 let colorsCases = []
+/**
+ * @type {Element}
+ */
 let lastPion = null;
 
-
 function clickOnCase(ele, ev) {
-    
+    if (lastPion != null) {
+        lastPion.parentElement.removeChild(lastPion)
+        this.appendChild(lastPion)
+        setColorHelp(-5, -5, "ee", "ee")
+        if (c.eat != null) {
+            c.eat.pion.remove()
+        }
+    }
 }
 
 

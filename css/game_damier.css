@@ -24,6 +24,7 @@
 .pion {
 	height: 100%;
 	width: 100%;
+	transition: all .5s ease-out;
 }
 
 .pion_border:hover .pion {
@@ -48,10 +49,12 @@
 
 .pion_border:hover {
 	background-color: aqua;
+	transition: all .7s ease-out;
 }
 
 .border_click {
 	background-color: #121364;
+	transition: all .7s ease-out;
 }
 
 .border_click .pion {
@@ -59,8 +62,10 @@
 	width: 90%;
 	padding: 5%;
 	background-color: #645111;
+	transition: all .7s ease-out;
 }
 
 .help {
 	background-color: #121364;
+	transition: all .7s ease-out;
 }
