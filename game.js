@@ -5,6 +5,30 @@ function getCase(x, y) {
     return case1
 }
 
+/**
+ * 
+ * @param {Element} pion 
+ */
+function getXY(pion) {
+    let p = pion.parentElement
+    let id = p.id
+    return id.split(" ").reverse()
+}
+
+function distance(pion1, pion2) {
+    let p1 = getXY(pion1)
+    let p2 = getXY(pion2)
+    return Math.sqrt(Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1]))
+}
+
+function getMiddle(pion1, pion2) {
+    let p1 = getXY(pion1)
+    let p2 = getXY(pion2)
+    let x = (p1[0] + p2[0]) /2
+    let y = (p1[1] + p2[1]) /2
+    return getCase(x, y)
+}
+
 function getPion(x, y) {
     let case1 = getCase(x, y)
     return case1.firstElementChild
@@ -95,8 +119,10 @@ function clickOnCase(ele, ev) {
         lastPion.parentElement.removeChild(lastPion)
         this.appendChild(lastPion)
         setColorHelp(-5, -5, "ee", "ee")
-        if (c.eat != null) {
-            c.eat.pion.remove()
+        console.log(distance(lastPion, this))
+        if (distance(lastPion, this) > 1.5) {
+            console.log("remove")
+            getMiddle(lastPion, this).firstElementChild.remove()
         }
     }
 }
